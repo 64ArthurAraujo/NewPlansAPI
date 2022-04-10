@@ -6,9 +6,7 @@ import org.springframework.stereotype.Component;
 import actanalyzer.api.json.JsonRequest;
 import actanalyzer.api.service.implementation.CategoryServiceInterface;
 import actanalyzer.api.service.implementation.UserServiceInterface;
-import actanalyzer.database.table.Category;
-import actanalyzer.database.table.User;
-import actanalyzer.database.table.UserCategory;
+import actanalyzer.database.table.*;
 
 @Component
 public class UserCategoryJsonRequest implements JsonRequest<UserCategory> {
