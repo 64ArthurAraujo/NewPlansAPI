@@ -1,11 +1,15 @@
 package actanalyzer.database.table;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "usuario_categoria")
-public class UserCategory {
+public class UserCategory implements Serializable {
 	
+	private static final long serialVersionUID = 157514389456606351L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
