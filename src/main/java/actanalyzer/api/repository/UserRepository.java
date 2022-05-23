@@ -10,4 +10,5 @@ import actanalyzer.database.table.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long>{
 	List<User> findByUsername(String username);
+	User findByAuthToken(String auth_token);
 }

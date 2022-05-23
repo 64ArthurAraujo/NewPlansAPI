@@ -30,7 +30,7 @@ public class UserInsert {
 	
 	@RequestMapping(method = RequestMethod.POST, path = "/users/categories/", consumes = "application/json") 
 	public ResponseEntity<UserCategoryJsonResponse> createUser(@RequestBody UserCategoryJsonRequest jsonRequest) {
-		UserCategory newUserCategoryRelation = userCategoryService.insert(jsonRequest.convertJsonToEntity());	
+		ConvertedUserCategory newUserCategoryRelation = userCategoryService.insert(jsonRequest.convertJsonToEntity());	
 		
 		return new ResponseEntity<>(new UserCategoryJsonResponse(newUserCategoryRelation), HttpStatus.CREATED);
 	}

@@ -15,11 +15,11 @@ public class UserCategory implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "id_categoria")
-	private Long idCategory;
+	@Column(name = "name_categoria")
+	private String categoryName;
 	
-	@Column(name = "id_usuario")
-	private Long idUser;
+	@Column(name = "token_usuario")
+	private String userToken;
 	
 	@Column(name = "times_searched")
 	private int timesSearched;
@@ -32,20 +32,20 @@ public class UserCategory implements Serializable {
 		this.id = id;
 	}
 
-	public Long getIdCategory() {
-		return idCategory;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setIdCategory(Long idCategory) {
-		this.idCategory = idCategory;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
-	public Long getIdUser() {
-		return idUser;
+	public String getUserToken() {
+		return userToken;
 	}
 
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
+	public void setUserToken(String userToken) {
+		this.userToken = userToken;
 	}
 
 	public int getTimesSearched() {

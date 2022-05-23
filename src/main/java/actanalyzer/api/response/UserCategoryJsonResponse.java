@@ -1,6 +1,6 @@
 package actanalyzer.api.response;
 
-import actanalyzer.database.table.UserCategory;
+import actanalyzer.database.table.ConvertedUserCategory;
 
 public class UserCategoryJsonResponse {
 	private Long id;
@@ -8,7 +8,7 @@ public class UserCategoryJsonResponse {
 	private Long idUser;
 	private int timesSearched;
 	
-	public UserCategoryJsonResponse(UserCategory category) {
+	public UserCategoryJsonResponse(ConvertedUserCategory category) {
 		this.id = category.getId();
 		this.idCategory = category.getIdCategory();
 		this.idUser = category.getIdUser();
