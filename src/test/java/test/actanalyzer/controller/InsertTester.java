@@ -57,7 +57,7 @@ public class InsertTester {
 		request.perform(
 			post(REQUEST_PATH_INSERT + "/users/categories/")
 				.contentType("application/json")
-				.content("{ \"categoryName\": \"Tecnologia\", \"userToken\": \"4e9394b4d2876b8741b10a\" }")
+				.content("{ \"categoryName\": \"Programação\", \"userToken\": \"4e9394b4d2876b8741b10a\" }")
 		)
 		.andExpect(status().isCreated());
 	}
