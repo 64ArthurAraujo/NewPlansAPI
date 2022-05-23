@@ -1,7 +1,7 @@
 package actanalyzer.api.service.implementation;
 
-public abstract interface ServiceInterface<T> {
-	T getById(T entity);
+public abstract interface ServiceInterface<T1, T2> {
+	T1 getById(T1 entity);
 	
-	T insert(T entity);
+	T2 insert(T1 entity);
 }
