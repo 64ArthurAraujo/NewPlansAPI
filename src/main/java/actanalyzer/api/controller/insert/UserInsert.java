@@ -11,6 +11,7 @@ import actanalyzer.api.request.*;
 import actanalyzer.api.response.*;
 import actanalyzer.api.service.implementation.*;
 import actanalyzer.database.table.*;
+import actanalyzer.database.table.util.ConvertedUserCategory;
 
 @RestController
 @RequestMapping(path = REQUEST_PATH_INSERT)
