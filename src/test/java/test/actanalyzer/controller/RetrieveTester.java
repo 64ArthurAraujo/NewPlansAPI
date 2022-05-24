@@ -42,7 +42,7 @@ public class RetrieveTester {
 	public void getAllCategories() throws Exception {
 		request.perform( get(REQUEST_PATH_RETRIEVE + "/categories/") )
 			.andExpect(status().isOk())
-			.andExpect(content().json("[{\"id\":1,\"name\":\"Programação\",\"groupId\":1}]"))
+			.andExpect(content().json("[{\"id\":1,\"name\":\"Programação\",\"groupId\":1},{\"id\":2,\"name\":\"Design Patterns\",\"groupId\":1}]"))
 			.andReturn();
 	}
 }
