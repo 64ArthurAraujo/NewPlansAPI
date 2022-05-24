@@ -3,8 +3,7 @@ INSERT INTO usuario (username, password, auth_token) VALUES ('Arthur', 'senha', 
 INSERT INTO grupo (name) VALUES ('Tecnologia');
 
 INSERT INTO categoria (name, id_grupo) VALUES ('Programação', 1);
-
-
+INSERT INTO categoria (name, id_grupo) VALUES ('Design Patterns', 1);
 
 
 
