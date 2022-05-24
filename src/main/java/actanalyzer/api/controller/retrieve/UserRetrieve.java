@@ -36,7 +36,7 @@ public class UserRetrieve {
 		return new ResponseEntity<Iterable<User>>(userService.getAllUsers(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}/total-searches/")
+	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}/searches/total")
 	public ResponseEntity<Integer> getUserTotalSearches(@PathVariable("id") @NotNull Long id) {
 		int totalSearchAmount = 0;
 		
@@ -47,7 +47,7 @@ public class UserRetrieve {
 		return new ResponseEntity<Integer>(totalSearchAmount, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}/categorised-searches/")
+	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}/searches/categorised")
 	public ResponseEntity<List<CategorisedUserCategory>> getCategorisedUserSearches(@PathVariable("id") @NotNull Long id) {
 		List<CategorisedUserCategory> searchCategories = new ArrayList<>();
 		
