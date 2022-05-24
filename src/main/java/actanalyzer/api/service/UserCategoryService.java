@@ -2,6 +2,7 @@ package actanalyzer.api.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,20 +25,24 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 	
 	@Override
 	public UserCategory getById(UserCategory entity) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ConvertedUserCategory insert(UserCategory entity) {
 		if (categoryIsAlreadyCreated(entity)) {
-			UserCategory existingCategory = entity;
+			Optional<UserCategory> optCategory = repository.findById(getAlreadyCreatedCategory(entity).getId());
 			
-			int timesSearched = existingCategory.getTimesSearched();
+			UserCategory existingUserCategoryRelation = optCategory.get();
 			
-			existingCategory.setTimesSearched(timesSearched ++);
+			int timesSearched = existingUserCategoryRelation.getTimesSearched();
 			
-			return convertUserCategory(repository.save(existingCategory));
+			entity.setId(existingUserCategoryRelation.getId());
+			entity.setTimesSearched(timesSearched + 1);
+			
+			repository.save(entity);
+			
+			return convertUserCategory(entity);
 		} else {
 			return convertUserCategory(repository.save(entity));
 		}
@@ -56,6 +61,20 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 		
 		return false;
 	}
+	
+	private UserCategory getAlreadyCreatedCategory(UserCategory entity) {
+		ConvertedUserCategory convertedEntity = convertUserCategory(entity);
+		
+		for (UserCategory categoryEntry : repository.findAll()) {
+			ConvertedUserCategory convertedEntry = convertUserCategory(categoryEntry);
+			
+			if (convertedEntry.getIdCategory() == convertedEntity.getIdCategory() && convertedEntry.getIdUser() == convertedEntity.getIdUser()) {
+				return categoryEntry;
+			}
+		}
+		
+		return null;
+	}
 
 	private ConvertedUserCategory convertUserCategory(UserCategory userCategory) {
 		Category category = categoryRepository.findByName(userCategory.getCategoryName());
@@ -66,6 +85,7 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 		converted.setId(userCategory.getId());
 		converted.setIdCategory(category.getId());
 		converted.setIdUser(user.getId());
+		converted.setTimesSearched(userCategory.getTimesSearched());
 		
 		return converted;
 	}
