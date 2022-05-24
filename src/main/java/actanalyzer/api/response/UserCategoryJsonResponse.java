@@ -1,6 +1,6 @@
 package actanalyzer.api.response;
 
-import actanalyzer.database.table.ConvertedUserCategory;
+import actanalyzer.database.table.util.ConvertedUserCategory;
 
 public class UserCategoryJsonResponse {
 	private Long id;
