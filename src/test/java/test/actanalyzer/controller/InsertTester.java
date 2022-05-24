@@ -3,6 +3,7 @@ package test.actanalyzer.controller;
 import static actanalyzer.api.configuration.Settings.REQUEST_PATH_INSERT;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,5 +61,26 @@ public class InsertTester {
 				.content("{ \"categoryName\": \"Programação\", \"userToken\": \"4e9394b4d2876b8741b10a\" }")
 		)
 		.andExpect(status().isCreated());
+	}
+	
+	@Test
+	public void checkIfUserCategoryTimesSearchedIsIncrementing() throws Exception {
+		request.perform(
+				post(REQUEST_PATH_INSERT + "/users/categories/")
+					.contentType("application/json")
+					.content("{ \"categoryName\": \"Programação\", \"userToken\": \"4e9394b4d2876b8741b10a\" }")
+			)
+			.andExpect(status().isCreated())
+			.andExpect(jsonPath("$.id").value("1"))
+			.andExpect(jsonPath("$.timesSearched").value("1"));
+		
+		request.perform(
+				post(REQUEST_PATH_INSERT + "/users/categories/")
+					.contentType("application/json")
+					.content("{ \"categoryName\": \"Programação\", \"userToken\": \"4e9394b4d2876b8741b10a\" }")
+			)
+			.andExpect(status().isCreated())
+			.andExpect(jsonPath("$.id").value("1"))
+			.andExpect(jsonPath("$.timesSearched").value("2"));
 	}
 }
