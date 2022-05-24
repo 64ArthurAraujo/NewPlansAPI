@@ -7,9 +7,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import actanalyzer.api.repository.*;
+import actanalyzer.api.repository.CategoryRepository;
+import actanalyzer.api.repository.UserCategoryRepository;
+import actanalyzer.api.repository.UserRepository;
 import actanalyzer.api.service.implementation.UserCategoryServiceInterface;
-import actanalyzer.database.table.*;
+import actanalyzer.database.table.Category;
+import actanalyzer.database.table.User;
+import actanalyzer.database.table.UserCategory;
+import actanalyzer.database.table.util.CategorisedUserCategory;
+import actanalyzer.database.table.util.ConvertedUserCategory;
 
 @Service
 public class UserCategoryService implements UserCategoryServiceInterface {
@@ -85,6 +91,19 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 		converted.setId(userCategory.getId());
 		converted.setIdCategory(category.getId());
 		converted.setIdUser(user.getId());
+		converted.setTimesSearched(userCategory.getTimesSearched());
+		
+		return converted;
+	}
+	
+	public CategorisedUserCategory convertToCategorisedUserCategory(UserCategory userCategory) {
+		User user = userRepository.findByAuthToken(userCategory.getUserToken());
+		
+		CategorisedUserCategory converted = new CategorisedUserCategory();
+		
+		converted.setId(userCategory.getId());
+		converted.setCategoryName(userCategory.getCategoryName());
+		converted.setUserName(user.getUsername());
 		converted.setTimesSearched(userCategory.getTimesSearched());
 		
 		return converted;
