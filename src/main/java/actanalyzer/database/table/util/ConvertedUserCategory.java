@@ -1,4 +1,4 @@
-package actanalyzer.database.table;
+package actanalyzer.database.table.util;
 
 public class ConvertedUserCategory {
 	private Long id;
