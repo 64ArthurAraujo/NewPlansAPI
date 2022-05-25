@@ -19,8 +19,12 @@ public class UserService implements UserServiceInterface {
 	
 	@Override
 	public User getById(User entity) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public User findById(Long id) {
+		return repository.findById(id).get();
 	}
 	
 	@Override

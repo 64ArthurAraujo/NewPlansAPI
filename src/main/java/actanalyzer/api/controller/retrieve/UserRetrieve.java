@@ -36,6 +36,12 @@ public class UserRetrieve {
 		return new ResponseEntity<Iterable<User>>(userService.getAllUsers(), HttpStatus.OK);
 	}
 	
+	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}")
+	public ResponseEntity<User> getUserById(@PathVariable("id") @NotNull Long id) {
+		
+		return new ResponseEntity<User>(userService.findById(id), HttpStatus.OK);
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}/searches/total")
 	public ResponseEntity<Integer> getUserTotalSearches(@PathVariable("id") @NotNull Long id) {
 		int totalSearchAmount = 0;
