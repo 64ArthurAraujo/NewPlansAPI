@@ -17,12 +17,7 @@ public class UserService implements UserServiceInterface {
 	}
 	
 	@Override
-	public User getById(User entity) {
-		return findById(entity.getId());
-	}
-	
-	@Override
-	public User findById(Long id) {
+	public User getById(Long id) {
 		return repository.findById(id).get();
 	}
 	

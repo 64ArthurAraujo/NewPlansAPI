@@ -38,7 +38,7 @@ public class UserRetrieve {
 	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable("id") @NotNull Long id) {
 		
-		return new ResponseEntity<User>(userService.findById(id), HttpStatus.OK);
+		return new ResponseEntity<User>(userService.getById(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}/searches/total")

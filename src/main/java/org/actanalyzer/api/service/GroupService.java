@@ -2,13 +2,12 @@ package org.actanalyzer.api.service;
 
 import org.actanalyzer.api.repository.GroupRepository;
 import org.actanalyzer.api.service.implementation.GroupServiceInterface;
-import org.actanalyzer.database.table.Category;
 import org.actanalyzer.database.table.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GroupService implements GroupServiceInterface {
+public class GroupService implements GroupServiceInterface  {
 	
 	@Autowired
 	private GroupRepository repository;
@@ -18,14 +17,8 @@ public class GroupService implements GroupServiceInterface {
 	}
 
 	@Override
-	public Group getById(Group entity) {
-		for (Group groupEntry : repository.findAll()) {
-			if (groupEntry.getId() == entity.getId()) {
-				return groupEntry;
-			}
-		}
-		
-		return null;
+	public Group getById(Long id) {
+		return repository.findById(id).get();
 	}
 
 	@Override

@@ -13,14 +13,8 @@ public class CategoryService implements CategoryServiceInterface {
 	private CategoryRepository repository;
 
 	@Override
-	public Category getById(Category entity) {
-		for (Category categoryEntry : repository.findAll()) {
-			if (categoryEntry.getId() == entity.getId()) {
-				return categoryEntry;
-			}
-		}
-		
-		return null;
+	public Category getById(Long id) {
+		return repository.findById(id).get();
 	}
 	
 	@Override

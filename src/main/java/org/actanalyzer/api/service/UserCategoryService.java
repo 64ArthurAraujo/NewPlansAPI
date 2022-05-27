@@ -9,7 +9,6 @@ import org.actanalyzer.api.repository.UserCategoryRepository;
 import org.actanalyzer.api.repository.UserRepository;
 import org.actanalyzer.api.service.implementation.UserCategoryServiceInterface;
 import org.actanalyzer.database.table.Category;
-import org.actanalyzer.database.table.Group;
 import org.actanalyzer.database.table.User;
 import org.actanalyzer.database.table.UserCategory;
 import org.actanalyzer.database.table.util.CategorisedUserCategory;
@@ -30,14 +29,8 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 	private UserRepository userRepository;
 	
 	@Override
-	public UserCategory getById(UserCategory entity) {
-		for (UserCategory userCategoryEntry : repository.findAll()) {
-			if (userCategoryEntry.getId() == entity.getId()) {
-				return userCategoryEntry;
-			}
-		}
-		
-		return null;
+	public UserCategory getById(Long id) {
+		return repository.findById(id).get();
 	}
 
 	@Override
