@@ -45,4 +45,27 @@ public class RetrieveTester {
 			.andExpect(content().json("[{\"id\":1,\"name\":\"Programação\",\"groupId\":1},{\"id\":2,\"name\":\"Design Patterns\",\"groupId\":1}]"))
 			.andReturn();
 	}
+	
+	@Test
+	public void getUserInformationById() throws Exception {
+		request.perform( get(REQUEST_PATH_RETRIEVE + "/users/1") )
+			.andExpect(status().isOk())
+			.andExpect(content().json("{\"id\":1,\"username\":\"Arthur\",\"password\":\"senha\",\"authToken\":\"4e9394b4d2876b8741b10a\"}"))
+			.andReturn();
+	}
+	
+	@Test
+	public void getUserTotalSearches() throws Exception {
+		request.perform( get(REQUEST_PATH_RETRIEVE + "/users/1/searches/total") )
+			.andExpect(status().isOk())
+			.andExpect(content().string("0"))
+			.andReturn();
+	}
+	
+	@Test
+	public void getUserCategorisedSearches() throws Exception {
+		request.perform( get(REQUEST_PATH_RETRIEVE + "/users/1/searches/categorised") )
+			.andExpect(status().isOk())
+			.andReturn();
+	}
 }
