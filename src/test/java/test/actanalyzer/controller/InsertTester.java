@@ -1,6 +1,6 @@
 package test.actanalyzer.controller;
 
-import static br.org.actanalyzer.api.configuration.Settings.REQUEST_PATH_INSERT;
+import static actanalyzer.api.configuration.Settings.REQUEST_PATH_INSERT;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import br.org.actanalyzer.Application;
+import actanalyzer.Application;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
