@@ -19,7 +19,7 @@ public class UserService implements UserServiceInterface {
 	
 	@Override
 	public User getById(User entity) {
-		return null;
+		return findById(entity.getId());
 	}
 	
 	@Override

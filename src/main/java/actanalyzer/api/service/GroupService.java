@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import actanalyzer.api.repository.GroupRepository;
 import actanalyzer.api.service.implementation.GroupServiceInterface;
+import actanalyzer.database.table.Category;
 import actanalyzer.database.table.Group;
 
 @Service
@@ -19,7 +20,12 @@ public class GroupService implements GroupServiceInterface {
 
 	@Override
 	public Group getById(Group entity) {
-		// TODO Auto-generated method stub
+		for (Group groupEntry : repository.findAll()) {
+			if (groupEntry.getId() == entity.getId()) {
+				return groupEntry;
+			}
+		}
+		
 		return null;
 	}
 

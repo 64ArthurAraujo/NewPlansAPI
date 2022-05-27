@@ -15,7 +15,12 @@ public class CategoryService implements CategoryServiceInterface {
 
 	@Override
 	public Category getById(Category entity) {
-		// TODO Auto-generated method stub
+		for (Category categoryEntry : repository.findAll()) {
+			if (categoryEntry.getId() == entity.getId()) {
+				return categoryEntry;
+			}
+		}
+		
 		return null;
 	}
 	
