@@ -2,7 +2,6 @@ package org.actanalyzer.api.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.actanalyzer.api.repository.CategoryRepository;
 import org.actanalyzer.api.repository.UserCategoryRepository;
@@ -85,12 +84,10 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 		Category category = categoryRepository.findByName(userCategory.getCategoryName());
 		User user = userRepository.findByAuthToken(userCategory.getUserToken());
 		
-		ConvertedUserCategory converted = new ConvertedUserCategory();
-		
-		converted.setId(userCategory.getId());
-		converted.setIdCategory(category.getId());
-		converted.setIdUser(user.getId());
-		converted.setTimesSearched(userCategory.getTimesSearched());
+		ConvertedUserCategory converted = new ConvertedUserCategory(
+			userCategory.getId(), category.getId(),
+			user.getId(), userCategory.getTimesSearched()
+		);
 		
 		return converted;
 	}
@@ -98,12 +95,10 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 	public CategorisedUserCategory convertToCategorisedUserCategory(UserCategory userCategory) {
 		User user = userRepository.findByAuthToken(userCategory.getUserToken());
 		
-		CategorisedUserCategory converted = new CategorisedUserCategory();
-		
-		converted.setId(userCategory.getId());
-		converted.setCategoryName(userCategory.getCategoryName());
-		converted.setUserName(user.getUsername());
-		converted.setTimesSearched(userCategory.getTimesSearched());
+		CategorisedUserCategory converted = new CategorisedUserCategory(
+			userCategory.getId(), userCategory.getCategoryName(),
+			user.getUsername(), userCategory.getTimesSearched()
+		);
 		
 		return converted;
 	}

@@ -7,6 +7,13 @@ public class ConvertedUserCategory {
 	
 	private Long idUser;
 	
+	public ConvertedUserCategory(Long id, Long idCategory, Long idUser, int timesSearched) {
+		this.id = id;
+		this.idCategory = idCategory;
+		this.idUser = idUser;
+		this.timesSearched = timesSearched;
+	}
+
 	private int timesSearched;
 
 	public Long getId() {

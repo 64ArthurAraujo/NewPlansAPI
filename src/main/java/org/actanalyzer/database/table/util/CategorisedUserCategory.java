@@ -3,6 +3,13 @@ package org.actanalyzer.database.table.util;
 public class CategorisedUserCategory {
 	private Long id;
 	
+	public CategorisedUserCategory(Long id, String categoryName, String userName, int timesSearched) {
+		this.id = id;
+		this.categoryName = categoryName;
+		this.userName = userName;
+		this.timesSearched = timesSearched;
+	}
+
 	private String categoryName;
 	
 	private String userName;
