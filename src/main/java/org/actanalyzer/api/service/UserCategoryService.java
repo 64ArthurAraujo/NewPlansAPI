@@ -32,25 +32,23 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 	public UserCategory getById(Long id) {
 		return repository.findById(id).get();
 	}
+	
+	public UserCategory getAlreadyCreatedUserCategoryRelation(UserCategory entity) {
+		return repository.findById(getAlreadyCreatedCategory(entity).getId()).get();
+	}
 
 	@Override
 	public ConvertedUserCategory insert(UserCategory entity) {
 		if (categoryIsAlreadyCreated(entity)) {
-			Optional<UserCategory> optCategory = repository.findById(getAlreadyCreatedCategory(entity).getId());
-			
-			UserCategory existingUserCategoryRelation = optCategory.get();
+			UserCategory existingUserCategoryRelation = getAlreadyCreatedUserCategoryRelation(entity);
 			
 			int timesSearched = existingUserCategoryRelation.getTimesSearched();
 			
 			entity.setId(existingUserCategoryRelation.getId());
 			entity.setTimesSearched(timesSearched + 1);
-			
-			repository.save(entity);
-			
-			return convertUserCategory(entity);
-		} else {
-			return convertUserCategory(repository.save(entity));
-		}
+		} 
+		
+		return convertUserCategory(repository.save(entity));
 	}
 
 	private boolean categoryIsAlreadyCreated(UserCategory entity) {
@@ -59,7 +57,8 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 		for (UserCategory categoryEntry : repository.findAll()) {
 			ConvertedUserCategory convertedEntry = convertUserCategory(categoryEntry);
 			
-			if (convertedEntry.getIdCategory() == convertedEntity.getIdCategory() && convertedEntry.getIdUser() == convertedEntity.getIdUser()) {
+			if (convertedEntry.getIdCategory() == convertedEntity.getIdCategory() && 
+				convertedEntry.getIdUser() == convertedEntity.getIdUser()) {
 				return true;
 			}
 		}
@@ -73,7 +72,8 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 		for (UserCategory categoryEntry : repository.findAll()) {
 			ConvertedUserCategory convertedEntry = convertUserCategory(categoryEntry);
 			
-			if (convertedEntry.getIdCategory() == convertedEntity.getIdCategory() && convertedEntry.getIdUser() == convertedEntity.getIdUser()) {
+			if (convertedEntry.getIdCategory() == convertedEntity.getIdCategory() && 
+					convertedEntry.getIdUser() == convertedEntity.getIdUser()) {
 				return categoryEntry;
 			}
 		}

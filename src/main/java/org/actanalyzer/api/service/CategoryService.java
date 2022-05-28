@@ -19,13 +19,7 @@ public class CategoryService implements CategoryServiceInterface {
 	
 	@Override
 	public Category getByName(String name) {
-		for (Category categoryEntry : repository.findAll()) {
-			if (categoryEntry.getName().equals(name)) {
-				return categoryEntry;
-			}
-		}
-		
-		return null;
+		return repository.findByName(name);
 	}
 
 	@Override

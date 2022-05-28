@@ -23,13 +23,7 @@ public class UserService implements UserServiceInterface {
 	
 	@Override
 	public User getByToken(String authToken) {
-		for (User userEntry : repository.findAll()) {
-			if (userEntry.getAuthToken().equals(authToken)) {
-				return userEntry;
-			}
-		}
-		
-		return null;
+		return repository.findByAuthToken(authToken);
 	}
 
 	@Override
