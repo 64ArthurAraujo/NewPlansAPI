@@ -41,25 +41,25 @@ public class UserRetrieve {
 		return new ResponseEntity<User>(userService.getById(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}/searches/total")
-	public ResponseEntity<Integer> getUserTotalSearches(@PathVariable("id") @NotNull Long id) {
-		int totalSearchAmount = 0;
+	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}/interest/total")
+	public ResponseEntity<Integer> getUserTotalInterest(@PathVariable("id") @NotNull Long id) {
+		int interestAmount = 0;
 		
 		for (UserCategory entry : userCategoryService.listUserCategories(id)) {
-			totalSearchAmount += entry.getTimesSearched();
+			interestAmount += entry.getInterestRate();
 		}
 		
-		return new ResponseEntity<Integer>(totalSearchAmount, HttpStatus.OK);
+		return new ResponseEntity<Integer>(interestAmount, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}/searches/categorised")
-	public ResponseEntity<List<CategorisedUserCategory>> getCategorisedUserSearches(@PathVariable("id") @NotNull Long id) {
-		List<CategorisedUserCategory> searchCategories = new ArrayList<>();
+	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}/interest/categorised")
+	public ResponseEntity<List<CategorisedUserCategory>> getCategorisedInterests(@PathVariable("id") @NotNull Long id) {
+		List<CategorisedUserCategory> interestCategories = new ArrayList<>();
 		
 		for (UserCategory entry : userCategoryService.listUserCategories(id)) {
-			searchCategories.add(userCategoryService.convertToCategorisedUserCategory(entry));
+			interestCategories.add(userCategoryService.convertToCategorisedUserCategory(entry));
 		}
 		
-		return new ResponseEntity<List<CategorisedUserCategory>>(searchCategories, HttpStatus.OK);
+		return new ResponseEntity<List<CategorisedUserCategory>>(interestCategories, HttpStatus.OK);
 	}
 }

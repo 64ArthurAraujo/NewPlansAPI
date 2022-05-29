@@ -13,7 +13,7 @@ public class UserCategoryJsonRequest implements JsonRequest<UserCategory> {
 		
 		newUserCategoryRelation.setCategoryName(categoryName);
 		newUserCategoryRelation.setUserToken(userToken);
-		newUserCategoryRelation.setTimesSearched(1);
+		newUserCategoryRelation.setInterestRate(1);
 		
 		return newUserCategoryRelation;
 	}

@@ -29,7 +29,7 @@ CREATE TABLE usuario_categoria (
   id bigint GENERATED ALWAYS AS IDENTITY,
   name_categoria varchar(255),
   token_usuario varchar(128),
-  times_searched bigint,
+  interest_rate bigint,
   PRIMARY KEY (id),
   CONSTRAINT fk_name_categoria FOREIGN KEY (name_categoria) REFERENCES categoria(name) ON DELETE SET NULL,
   CONSTRAINT fk_token_usuario FOREIGN KEY (token_usuario) REFERENCES usuario(auth_token) ON DELETE SET NULL

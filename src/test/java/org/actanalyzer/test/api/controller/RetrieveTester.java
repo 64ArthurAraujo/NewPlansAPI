@@ -55,7 +55,7 @@ public class RetrieveTester {
 	
 	@Test
 	public void getUserTotalSearches() throws Exception {
-		request.perform( get(REQUEST_PATH_RETRIEVE + "/users/1/searches/total") )
+		request.perform( get(REQUEST_PATH_RETRIEVE + "/users/1/interest/total") )
 			.andExpect(status().isOk())
 			.andExpect(content().string("0"))
 			.andReturn();
@@ -63,7 +63,7 @@ public class RetrieveTester {
 	
 	@Test
 	public void getUserCategorisedSearches() throws Exception {
-		request.perform( get(REQUEST_PATH_RETRIEVE + "/users/1/searches/categorised") )
+		request.perform( get(REQUEST_PATH_RETRIEVE + "/users/1/interest/categorised") )
 			.andExpect(status().isOk())
 			.andReturn();
 	}

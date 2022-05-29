@@ -40,11 +40,9 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 	public ConvertedUserCategory insert(UserCategory entity) {
 		if (categoryIsAlreadyCreated(entity)) {
 			UserCategory existingUserCategoryRelation = getAlreadyCreatedUserCategoryRelation(entity);
-			
-			int timesSearched = existingUserCategoryRelation.getTimesSearched();
-			
+
 			entity.setId(existingUserCategoryRelation.getId());
-			entity.setTimesSearched(timesSearched + 1);
+			entity.addInterest(1);
 		} 
 		
 		return convertUserCategory(repository.save(entity));
@@ -86,7 +84,7 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 		
 		ConvertedUserCategory converted = new ConvertedUserCategory(
 			userCategory.getId(), category.getId(),
-			user.getId(), userCategory.getTimesSearched()
+			user.getId(), userCategory.getInterestRate()
 		);
 		
 		return converted;
@@ -97,7 +95,7 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 		
 		CategorisedUserCategory converted = new CategorisedUserCategory(
 			userCategory.getId(), userCategory.getCategoryName(),
-			user.getUsername(), userCategory.getTimesSearched()
+			user.getUsername(), userCategory.getInterestRate()
 		);
 		
 		return converted;

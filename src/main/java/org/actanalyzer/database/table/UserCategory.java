@@ -21,8 +21,8 @@ public class UserCategory implements Serializable {
 	@Column(name = "token_usuario")
 	private String userToken;
 	
-	@Column(name = "times_searched")
-	private int timesSearched;
+	@Column(name = "interest_rate")
+	private int interestRate;
 
 	public Long getId() {
 		return id;
@@ -48,12 +48,16 @@ public class UserCategory implements Serializable {
 		this.userToken = userToken;
 	}
 
-	public int getTimesSearched() {
-		return timesSearched;
+	public int getInterestRate() {
+		return interestRate;
 	}
 
-	public void setTimesSearched(int timesSearched) {
-		this.timesSearched = timesSearched;
+	public void setInterestRate(int interestRate) {
+		this.interestRate = interestRate;
+	}
+	
+	public void addInterest(int interestIncrease) {
+		this.interestRate += interestIncrease;
 	}
 	
 }
