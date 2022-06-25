@@ -39,9 +39,9 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 	@Override
 	public ConvertedUserCategory insert(UserCategory entity) {
 		if (categoryIsAlreadyCreated(entity)) {
-			UserCategory existingUserCategoryRelation = getAlreadyCreatedUserCategoryRelation(entity);
+			UserCategory alreadyCreatedCategory = getAlreadyCreatedUserCategoryRelation(entity);
 
-			entity.setId(existingUserCategoryRelation.getId());
+			entity.setId(alreadyCreatedCategory.getId());
 			entity.addInterest(1);
 		} 
 		
@@ -54,8 +54,9 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 		for (UserCategory categoryEntry : repository.findAll()) {
 			ConvertedUserCategory convertedEntry = convertUserCategory(categoryEntry);
 			
-			if (convertedEntry.getIdCategory() == convertedEntity.getIdCategory() && 
-				convertedEntry.getIdUser() == convertedEntity.getIdUser()) {
+			if (convertedEntry.getIdCategory().equals(convertedEntity.getIdCategory())  &&
+				convertedEntry.getIdUser().equals(convertedEntity.getIdUser())
+			) {
 				return true;
 			}
 		}
@@ -68,9 +69,10 @@ public class UserCategoryService implements UserCategoryServiceInterface {
 		
 		for (UserCategory categoryEntry : repository.findAll()) {
 			ConvertedUserCategory convertedEntry = convertUserCategory(categoryEntry);
-			
-			if (convertedEntry.getIdCategory() == convertedEntity.getIdCategory() && 
-					convertedEntry.getIdUser() == convertedEntity.getIdUser()) {
+
+			if (convertedEntry.getIdCategory().equals(convertedEntity.getIdCategory())  &&
+					convertedEntry.getIdUser().equals(convertedEntity.getIdUser())
+			) {
 				return categoryEntry;
 			}
 		}
