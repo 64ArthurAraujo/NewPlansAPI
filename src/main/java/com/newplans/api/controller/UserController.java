@@ -10,10 +10,7 @@ import com.newplans.api.service.implementation.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,6 +30,11 @@ public class UserController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
  	}
+
+	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}")
+	public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
+		return new ResponseEntity<>(service.getByIdWithoutCredentials(id), HttpStatus.OK);
+	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/users/")
 	public ResponseEntity<List<UserResponse>> getUsers() {

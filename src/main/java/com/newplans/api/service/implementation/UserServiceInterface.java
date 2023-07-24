@@ -8,6 +8,7 @@ import java.util.List;
 public interface UserServiceInterface extends ServiceInterface<User, User> {
 	List<UserResponse> getAllUsers();
 	User getByToken(String token);
+	UserResponse getByIdWithoutCredentials(Long id);
 }
 
 

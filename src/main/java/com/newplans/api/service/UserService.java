@@ -26,6 +26,10 @@ public class UserService implements UserServiceInterface {
 	public User getById(Long id) {
 		return repository.findById(id).get();
 	}
+
+	public UserResponse getByIdWithoutCredentials(Long id) {
+		return new UserResponse(repository.findById(id).get());
+	}
 	
 	@Override
 	public User getByToken(String token) {
