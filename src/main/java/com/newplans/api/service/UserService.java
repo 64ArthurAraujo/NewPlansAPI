@@ -2,11 +2,15 @@ package com.newplans.api.service;
 
 import com.newplans.api.database.entity.User;
 import com.newplans.api.repository.UserRepository;
+import com.newplans.api.response.UserResponse;
 import com.newplans.api.security.HashedPassword;
 import com.newplans.api.security.Token;
 import com.newplans.api.service.implementation.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService implements UserServiceInterface {
@@ -39,8 +43,14 @@ public class UserService implements UserServiceInterface {
 	}
 
 	@Override
-	public Iterable<User> getAllUsers() {
-		return repository.findAll();
+	public List<UserResponse> getAllUsers() {
+		List<UserResponse> usersNoCredentials = new ArrayList<>();
+
+		for (User entry : repository.findAll()) {
+			usersNoCredentials.add(new UserResponse(entry));
+		}
+
+		return usersNoCredentials;
 	}
 
 }

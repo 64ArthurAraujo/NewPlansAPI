@@ -29,13 +29,6 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.GET, path = "/users/")
 	public ResponseEntity<List<UserResponse>> getUsers() {
-		// TODO: move this logic to the service
-		List<UserResponse> usersNoCredentials = new ArrayList<>();
-
-		for (User entry : service.getAllUsers()) {
-			usersNoCredentials.add(new UserResponse(entry));
-		}
-
-		return new ResponseEntity<>(usersNoCredentials, HttpStatus.OK);
+		return new ResponseEntity<>(service.getAllUsers(), HttpStatus.OK);
 	}
 }
