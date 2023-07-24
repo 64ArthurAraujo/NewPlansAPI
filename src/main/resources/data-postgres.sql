@@ -1,13 +1,2 @@
-INSERT INTO usuario (username, password, auth_token) VALUES ('Arthur', 'senha', '4e9394b4d2876b8741b10a');
-
-INSERT INTO grupo (name) VALUES ('Tecnologia');
-
-INSERT INTO categoria (name, id_grupo) VALUES ('Programação', 1);
-INSERT INTO categoria (name, id_grupo) VALUES ('Design Patterns', 1);
-
-
-
-
-
-
-
+INSERT INTO usuario (nome, sobrenome, nascimento_data, email, senha, token)
+VALUES ('Arthur', 'Araujo', '20-09-2005', 'arthur.araujo@tutanota.com', 'senha', '4e9394b4d2876b8741b10a');
