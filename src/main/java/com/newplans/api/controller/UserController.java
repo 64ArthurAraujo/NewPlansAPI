@@ -21,7 +21,7 @@ public class UserController {
 	private UserServiceInterface service;
 	
 	@RequestMapping(method = RequestMethod.POST, path = "/users/", consumes = "application/json")
-	public ResponseEntity insertUser(@RequestBody UserCreateRequest request) {
+	public ResponseEntity insert(@RequestBody UserCreateRequest request) {
 		try {
 			User newCreatedUser = service.insert(request.toEntity());
 
@@ -32,12 +32,12 @@ public class UserController {
  	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}")
-	public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
+	public ResponseEntity<UserResponse> getById(@PathVariable Long id) {
 		return new ResponseEntity<>(service.getByIdWithoutCredentials(id), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/users/")
-	public ResponseEntity<List<UserResponse>> getUsers() {
+	public ResponseEntity<List<UserResponse>> getAll() {
 		return new ResponseEntity<>(service.getAllUsers(), HttpStatus.OK);
 	}
 }

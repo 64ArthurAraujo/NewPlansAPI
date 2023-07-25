@@ -29,31 +29,32 @@ public class UserCreateRequest  {
 	}
 
 	private void validate() throws RequestValidationException {
-		// Nome
 		if (isNull(name) || name.isEmpty()) {
 			throw new RequestValidationException("Name cannot be empty or null");
 		}
-
 		if (hasSpecialCharacters(name)) {
 			throw new RequestValidationException("Name cannot contain special characters");
 		}
 
-		// Sobrenome
 		if (isNull(surname) || surname.isEmpty()){
 			throw new RequestValidationException("Surname cannot be empty or null");
 		}
-
 		if (hasSpecialCharacters(surname)) {
 			throw new RequestValidationException("Surname cannot contain special characters");
 		}
 
-		// Email
 		if (isNull(email) || email.isEmpty()) {
 			throw new RequestValidationException("Email cannot be empty or null");
 		}
-
 		if (invalidEmail(email)) {
 			throw new RequestValidationException("Email is invalid");
+		}
+
+		if (isNull(password) || password.isEmpty()) {
+			throw new RequestValidationException("Password cannot be empty or null");
+		}
+		if (isNull(birthdayDate) || birthdayDate.isEmpty()) {
+			throw new RequestValidationException("birthdayDate cannot be empty or null");
 		}
 	}
 }
