@@ -1,16 +1,18 @@
 package com.newplans.api.service;
 
 import com.newplans.api.database.entity.User;
+import com.newplans.api.exception.NoSuchEntryException;
 import com.newplans.api.repository.UserRepository;
 import com.newplans.api.response.UserResponse;
 import com.newplans.api.security.HashedPassword;
 import com.newplans.api.security.Token;
-import com.newplans.api.service.implementation.UserServiceInterface;
+import com.newplans.api.service.specification.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserServiceInterface {
@@ -23,12 +25,18 @@ public class UserService implements UserServiceInterface {
 	}
 	
 	@Override
-	public User getById(Long id) {
-		return repository.findById(id).get();
+	public User getById(Long id) throws NoSuchEntryException {
+		Optional<User> user = repository.findById(id);
+
+		if (user.isPresent()) {
+			return user.get();
+		}
+
+		throw new NoSuchEntryException("No entry found with id: '" + id + "'");
 	}
 
-	public UserResponse getByIdWithoutCredentials(Long id) {
-		return new UserResponse(repository.findById(id).get());
+	public UserResponse getByIdWithoutCredentials(Long id) throws NoSuchEntryException {
+		return new UserResponse(this.getById(id));
 	}
 	
 	@Override

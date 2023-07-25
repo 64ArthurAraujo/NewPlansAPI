@@ -41,6 +41,13 @@ public class UserControllerTest {
 				.andExpect(content().json("{\"id\":1,\"name\":\"Arthur\",\"surname\":\"Araujo\",\"email\":\"arthur.araujo@tutanota.com\",\"birthdayDate\":\"20-09-2005\"}"))
 				.andReturn();
 	}
+
+	@Test
+	public void getByNonexistentId() throws Exception {
+		request.perform( get(REQUEST_PATH + "/users/64") )
+				.andExpect(status().isNotFound())
+				.andReturn();
+	}
 	
 	@Test
 	public void insert() throws Exception {
