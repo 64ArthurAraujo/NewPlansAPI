@@ -16,7 +16,7 @@ CREATE TABLE usuario (
 CREATE TABLE produto (
     id bigint GENERATED ALWAYS AS IDENTITY,
     nome varchar(255),
-    preço bigint,
+    preco bigint,
     estoque bigint,
     PRIMARY KEY (id)
 );
