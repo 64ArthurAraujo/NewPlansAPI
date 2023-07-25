@@ -43,7 +43,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void getByNonexistentId() throws Exception {
+	public void getByInexistentId() throws Exception {
 		request.perform( get(REQUEST_PATH + "/users/64") )
 				.andExpect(status().isNotFound())
 				.andReturn();
