@@ -4,8 +4,8 @@ import com.newplans.api.configuration.Settings;
 import com.newplans.api.database.entity.User;
 import com.newplans.api.exception.NoSuchEntryException;
 import com.newplans.api.exception.RequestValidationException;
-import com.newplans.api.request.user.UserCreateRequest;
-import com.newplans.api.request.user.UserLoginRequest;
+import com.newplans.api.request.user.CreateRequest;
+import com.newplans.api.request.user.LoginRequest;
 import com.newplans.api.response.UserCreatedResponse;
 import com.newplans.api.response.UserResponse;
 import com.newplans.api.service.specification.UserServiceInterface;
@@ -26,7 +26,7 @@ public class UserController {
 	// CREATE
 	
 	@RequestMapping(method = RequestMethod.POST, path = "/users", consumes = "application/json")
-	public ResponseEntity insert(@RequestBody UserCreateRequest request) {
+	public ResponseEntity insert(@RequestBody CreateRequest request) {
 		try {
 			User newCreatedUser = service.insert(request.toEntity());
 
@@ -38,7 +38,7 @@ public class UserController {
 
 	 // READ
 	 @RequestMapping(method = RequestMethod.POST, path = "/users/login", consumes = "application/json")
-	 public ResponseEntity login(@RequestBody UserLoginRequest request) {
+	 public ResponseEntity login(@RequestBody LoginRequest request) {
 		 try {
 			 String token = service.login(request.toEntity());
 			 return new ResponseEntity<>(token, OK);
@@ -62,12 +62,12 @@ public class UserController {
 	}
 
 	// UPDATE
-	public ResponseEntity updateName(@RequestBody UserLoginRequest request) {
+	public ResponseEntity updateName(@RequestBody LoginRequest request) {
 		return null;
 	}
 
 	// DELETE
-	public ResponseEntity delete(@RequestBody UserLoginRequest request) {
+	public ResponseEntity delete(@RequestBody LoginRequest request) {
 		return null;
 	}
 }

@@ -7,7 +7,7 @@ import static com.newplans.api.security.RequestValidation.hasSpecialCharacters;
 import static com.newplans.api.security.RequestValidation.invalidEmail;
 import static java.util.Objects.isNull;
 
-public class UserCreateRequest  {
+public class CreateRequest {
 	public String name;
 	public String surname;
 	public String birthdayDate;

@@ -4,9 +4,9 @@ import com.newplans.api.configuration.Settings;
 import com.newplans.api.database.entity.Product;
 import com.newplans.api.exception.NoSuchEntryException;
 import com.newplans.api.exception.RequestValidationException;
-import com.newplans.api.request.product.ProductCreateRequest;
-import com.newplans.api.request.product.ProductNameUpdateRequest;
-import com.newplans.api.request.user.UserLoginRequest;
+import com.newplans.api.request.product.CreateRequest;
+import com.newplans.api.request.product.NameUpdateRequest;
+import com.newplans.api.request.user.LoginRequest;
 import com.newplans.api.service.specification.ProductServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class ProductController {
 
     // CREATE
     @RequestMapping(method = RequestMethod.POST, path = "/products", consumes = "application/json")
-    public ResponseEntity insert(@RequestBody ProductCreateRequest request) {
+    public ResponseEntity insert(@RequestBody CreateRequest request) {
         try {
             service.insert(request.toEntity());
             return new ResponseEntity<>(CREATED);
@@ -61,7 +61,7 @@ public class ProductController {
     @RequestMapping(method = RequestMethod.PUT, path = "/products/{id}/name")
     public ResponseEntity updateName(
             @PathVariable Long id,
-            @RequestBody ProductNameUpdateRequest request
+            @RequestBody NameUpdateRequest request
     ) {
         Product product;
 
@@ -85,7 +85,7 @@ public class ProductController {
 
     // DELETE
     @RequestMapping(method = RequestMethod.DELETE, path = "/products/{id}")
-    public ResponseEntity delete(@RequestBody UserLoginRequest request) {
+    public ResponseEntity delete(@RequestBody LoginRequest request) {
         return null;
     }
 }

@@ -5,7 +5,7 @@ import com.newplans.api.exception.RequestValidationException;
 
 import static java.util.Objects.isNull;
 
-public class ProductCreateRequest {
+public class CreateRequest {
     public String name;
 
     public String category;

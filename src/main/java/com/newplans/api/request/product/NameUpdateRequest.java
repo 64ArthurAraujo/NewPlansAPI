@@ -8,7 +8,7 @@ import static java.util.Objects.isNull;
 
 @Getter
 @Setter
-public class ProductNameUpdateRequest {
+public class NameUpdateRequest {
     public String name;
     public String adminToken;
 

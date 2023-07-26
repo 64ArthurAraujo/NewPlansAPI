@@ -6,7 +6,7 @@ import com.newplans.api.exception.RequestValidationException;
 import static com.newplans.api.security.RequestValidation.invalidEmail;
 import static java.util.Objects.isNull;
 
-public class UserLoginRequest {
+public class LoginRequest {
     public String email;
     public String password;
 
