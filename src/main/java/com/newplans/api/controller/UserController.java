@@ -1,7 +1,6 @@
 package com.newplans.api.controller;
 
 import com.newplans.api.configuration.Settings;
-import com.newplans.api.controller.specification.CrudController;
 import com.newplans.api.database.entity.User;
 import com.newplans.api.exception.NoSuchEntryException;
 import com.newplans.api.exception.RequestValidationException;
@@ -20,14 +19,13 @@ import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping(path = Settings.REQUEST_PATH)
-public class UserController implements CrudController<UserCreateRequest, UserResponse> {
+public class UserController {
 	@Autowired
 	private UserServiceInterface service;
 
 	// CREATE
 	
 	@RequestMapping(method = RequestMethod.POST, path = "/users", consumes = "application/json")
-	@Override
 	public ResponseEntity insert(@RequestBody UserCreateRequest request) {
 		try {
 			User newCreatedUser = service.insert(request.toEntity());
@@ -50,7 +48,6 @@ public class UserController implements CrudController<UserCreateRequest, UserRes
 	 }
 
 	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}")
-	@Override
 	public ResponseEntity<UserResponse> getById(@PathVariable Long id) {
 		try {
 			return new ResponseEntity<>(service.getByIdWithoutCredentials(id), OK);
@@ -60,7 +57,6 @@ public class UserController implements CrudController<UserCreateRequest, UserRes
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/users")
-	@Override
 	public ResponseEntity<List<UserResponse>> getAll() {
 		return new ResponseEntity<>(service.getAllUsers(), OK);
 	}

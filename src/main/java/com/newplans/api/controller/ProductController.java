@@ -1,7 +1,6 @@
 package com.newplans.api.controller;
 
 import com.newplans.api.configuration.Settings;
-import com.newplans.api.controller.specification.CrudController;
 import com.newplans.api.database.entity.Product;
 import com.newplans.api.exception.NoSuchEntryException;
 import com.newplans.api.exception.RequestValidationException;
@@ -19,13 +18,12 @@ import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping(path = Settings.REQUEST_PATH)
-public class ProductController implements CrudController<ProductCreateRequest, Product> {
+public class ProductController {
     @Autowired
     private ProductServiceInterface service;
 
     // CREATE
     @RequestMapping(method = RequestMethod.POST, path = "/products", consumes = "application/json")
-    @Override
     public ResponseEntity insert(@RequestBody ProductCreateRequest request) {
         try {
             service.insert(request.toEntity());
@@ -37,7 +35,6 @@ public class ProductController implements CrudController<ProductCreateRequest, P
 
     // READ
     @RequestMapping(method = RequestMethod.GET, path = "/products")
-    @Override
     public ResponseEntity<List<Product>> getAll() {
         return new ResponseEntity<>(service.getAllProducts(), OK);
     }
@@ -52,7 +49,6 @@ public class ProductController implements CrudController<ProductCreateRequest, P
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/products/{id}")
-    @Override
     public ResponseEntity getById(@PathVariable Long id) {
         try {
             return new ResponseEntity<>(service.getById(id), OK);
