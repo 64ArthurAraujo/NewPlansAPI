@@ -22,14 +22,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @AutoConfigureMockMvc
 public class UserControllerTest {
-	
 	@Autowired
 	private MockMvc request;
 
-
 	// CREATE
 	@Test
-	public void insert() throws Exception {
+	public void create() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")
 						.contentType("application/json")
@@ -38,7 +36,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void insertNameSpecialChar() throws Exception {
+	public void createNameSpecialChar() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")
 						.contentType("application/json")
@@ -47,7 +45,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void insertNameEmpty() throws Exception {
+	public void createNameEmpty() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")
 						.contentType("application/json")
@@ -56,7 +54,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void insertNameNull() throws Exception {
+	public void createNameNull() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")
 						.contentType("application/json")
@@ -65,7 +63,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void insertSurnameSpecialChar() throws Exception {
+	public void createSurnameSpecialChar() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")
 						.contentType("application/json")
@@ -74,7 +72,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void insertSurnameEmpty() throws Exception {
+	public void createSurnameEmpty() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")
 						.contentType("application/json")
@@ -83,7 +81,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void insertSurnameNull() throws Exception {
+	public void createSurnameNull() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")
 						.contentType("application/json")
@@ -92,7 +90,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void insertEmailInvalid() throws Exception {
+	public void createEmailInvalid() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")
 						.contentType("application/json")
@@ -101,7 +99,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void insertEmailEmpty() throws Exception {
+	public void createEmailEmpty() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")
 						.contentType("application/json")
@@ -110,7 +108,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void insertEmailNull() throws Exception {
+	public void createEmailNull() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")
 						.contentType("application/json")
@@ -119,7 +117,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void insertPasswordEmpty() throws Exception {
+	public void createPasswordEmpty() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")
 						.contentType("application/json")
@@ -128,7 +126,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void insertPasswordNull() throws Exception {
+	public void createPasswordNull() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")
 						.contentType("application/json")
@@ -137,7 +135,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void insertBirthdayDateEmpty() throws Exception {
+	public void createBirthdayDateEmpty() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")
 						.contentType("application/json")
@@ -146,7 +144,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void insertBirthdayDateNull() throws Exception {
+	public void createBirthdayDateNull() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")
 						.contentType("application/json")
@@ -156,7 +154,8 @@ public class UserControllerTest {
 
 	// READ
 	@Test
-	public void getAll() throws Exception {
+	public void AgetAll() throws Exception {
+		// This test is prefixed with an A so he can be the first one to execute
 		request.perform( get(REQUEST_PATH + "/users/") )
 				.andExpect(status().isOk())
 				.andExpect(content().json("[{\"id\":1,\"name\":\"Arthur\",\"surname\":\"Araujo\",\"email\":\"arthur.araujo@tutanota.com\",\"birthdayDate\":\"20-09-2005\"},{\"id\":2,\"name\":\"conta\",\"surname\":\"2\",\"email\":\"conta2@tutanota.com\",\"birthdayDate\":\"20-09-2005\"}]"))

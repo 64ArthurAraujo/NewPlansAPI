@@ -24,7 +24,7 @@ public class ProductController {
 
     // CREATE
     @RequestMapping(method = RequestMethod.POST, path = "/products", consumes = "application/json")
-    public ResponseEntity insert(@RequestBody CreateRequest request) {
+    public ResponseEntity create(@RequestBody CreateRequest request) {
         try {
             service.insert(request.toEntity());
         } catch (RequestValidationException e) {

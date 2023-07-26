@@ -23,7 +23,7 @@ public class ProductControllerTest {
 
     // CREATE
     @Test
-    public void insert() throws Exception {
+    public void create() throws Exception {
         request.perform(
                 post(REQUEST_PATH + "/products/")
                         .contentType("application/json")
@@ -32,7 +32,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void insertNameEmpty() throws Exception {
+    public void createNameEmpty() throws Exception {
         request.perform(
                 post(REQUEST_PATH + "/products/")
                         .contentType("application/json")
@@ -41,7 +41,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void insertNameNull() throws Exception {
+    public void createNameNull() throws Exception {
         request.perform(
                 post(REQUEST_PATH + "/products/")
                         .contentType("application/json")
@@ -50,7 +50,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void insertCategoryEmpty() throws Exception {
+    public void createCategoryEmpty() throws Exception {
         request.perform(
                 post(REQUEST_PATH + "/products/")
                         .contentType("application/json")
@@ -59,7 +59,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void insertCategoryNull() throws Exception {
+    public void createCategoryNull() throws Exception {
         request.perform(
                 post(REQUEST_PATH + "/products/")
                         .contentType("application/json")
@@ -68,7 +68,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void insertPriceNull() throws Exception {
+    public void createPriceNull() throws Exception {
         request.perform(
                 post(REQUEST_PATH + "/products/")
                         .contentType("application/json")
@@ -77,7 +77,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void insertStockNull() throws Exception {
+    public void createStockNull() throws Exception {
         request.perform(
                 post(REQUEST_PATH + "/products/")
                         .contentType("application/json")
@@ -86,7 +86,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void insertPriceZero() throws Exception {
+    public void createPriceZero() throws Exception {
         request.perform(
                 post(REQUEST_PATH + "/products/")
                         .contentType("application/json")

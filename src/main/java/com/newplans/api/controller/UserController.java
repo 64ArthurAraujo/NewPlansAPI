@@ -25,7 +25,7 @@ public class UserController {
 
 	// CREATE
 	@RequestMapping(method = RequestMethod.POST, path = "/users", consumes = "application/json")
-	public ResponseEntity insert(@RequestBody CreateRequest request) {
+	public ResponseEntity create(@RequestBody CreateRequest request) {
 		User createdUser;
 
 		try {
