@@ -1,4 +1,4 @@
-package com.newplans.api.request;
+package com.newplans.api.request.user;
 
 import com.newplans.api.database.entity.User;
 import com.newplans.api.exception.RequestValidationException;
