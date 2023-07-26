@@ -59,6 +59,16 @@ public class UserControllerTest {
 	}
 
 	@Test
+	public void login() throws Exception {
+		request.perform(
+						post(REQUEST_PATH + "/users/login")
+								.contentType("application/json")
+								.content("{ \"email\": \"arthur.araujo@gmail.com\", \"password\": \"S_enha64\" }")
+				)
+				.andExpect(status().isOk());
+	}
+
+	@Test
 	public void insertNameSpecialChar() throws Exception {
 		request.perform(
 				post(REQUEST_PATH + "/users/")

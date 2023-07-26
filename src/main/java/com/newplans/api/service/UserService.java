@@ -1,6 +1,7 @@
 package com.newplans.api.service;
 
 import com.newplans.api.database.entity.User;
+import com.newplans.api.exception.IncorrectCredentialsException;
 import com.newplans.api.exception.NoSuchEntryException;
 import com.newplans.api.repository.UserRepository;
 import com.newplans.api.response.UserResponse;
@@ -28,20 +29,37 @@ public class UserService implements UserServiceInterface {
 	public User getById(Long id) throws NoSuchEntryException {
 		Optional<User> user = repository.findById(id);
 
-		if (user.isPresent()) {
-			return user.get();
+		if (!user.isPresent()) {
+			throw new NoSuchEntryException("No entry found with id: '" + id + "'");
 		}
 
-		throw new NoSuchEntryException("No entry found with id: '" + id + "'");
+		return user.get();
 	}
 
 	public UserResponse getByIdWithoutCredentials(Long id) throws NoSuchEntryException {
 		return new UserResponse(this.getById(id));
 	}
-	
+
 	@Override
-	public User getByToken(String token) {
-		return repository.findByToken(token);
+	public User getByEmail(String email) throws NoSuchEntryException {
+		Optional<User> user = repository.findByEmail(email);
+
+		if (!user.isPresent()) {
+			throw new NoSuchEntryException("No entry found with email: '" + email + "'");
+		}
+
+		return user.get();
+	}
+
+	@Override
+	public User getByToken(String token) throws NoSuchEntryException {
+		Optional<User> user = repository.findByToken(token);
+
+		if (!user.isPresent()) {
+			throw new NoSuchEntryException("No entry found with token: '" + token + "'");
+		}
+
+		return user.get();
 	}
 
 	@Override
@@ -53,6 +71,18 @@ public class UserService implements UserServiceInterface {
 
 		return repository.save(entity);
 	}
+
+	public String login(User entity) throws NoSuchEntryException, IncorrectCredentialsException {
+		String hashedPasswd = new HashedPassword(entity.getEmail(), entity.getPassword()).getValue();
+		User userToCompareHash = this.getByEmail(entity.getEmail());
+
+		if (!userToCompareHash.getPassword().equals(hashedPasswd)) {
+			throw new IncorrectCredentialsException("Credentials did not match");
+		}
+
+		return userToCompareHash.getToken();
+	}
+
 
 	@Override
 	public List<UserResponse> getAllUsers() {

@@ -53,6 +53,7 @@ public class UserCreateRequest  {
 		if (isNull(password) || password.isEmpty()) {
 			throw new RequestValidationException("Password cannot be empty or null");
 		}
+
 		if (isNull(birthdayDate) || birthdayDate.isEmpty()) {
 			throw new RequestValidationException("birthdayDate cannot be empty or null");
 		}

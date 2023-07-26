@@ -8,8 +8,12 @@ import java.util.List;
 
 public interface UserServiceInterface extends ServiceInterface<User, User> {
 	List<UserResponse> getAllUsers();
-	User getByToken(String token);
+	User getByToken(String token) throws NoSuchEntryException;
 	UserResponse getByIdWithoutCredentials(Long id) throws NoSuchEntryException;
+
+	User getByEmail(String email) throws NoSuchEntryException;
+
+	String login(User entity) throws Exception;
 }
 
 

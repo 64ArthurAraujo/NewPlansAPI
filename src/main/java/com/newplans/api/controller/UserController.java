@@ -6,6 +6,7 @@ import com.newplans.api.database.entity.User;
 import com.newplans.api.exception.NoSuchEntryException;
 import com.newplans.api.exception.RequestValidationException;
 import com.newplans.api.request.UserCreateRequest;
+import com.newplans.api.request.UserLoginRequest;
 import com.newplans.api.response.UserCreatedResponse;
 import com.newplans.api.response.UserResponse;
 import com.newplans.api.service.specification.UserServiceInterface;
@@ -34,6 +35,16 @@ public class UserController implements CrudController<UserCreateRequest, UserRes
 			return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
 		}
  	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/users/login", consumes = "application/json")
+	public ResponseEntity login(@RequestBody UserLoginRequest request) {
+		try {
+			String token = service.login(request.toEntity());
+			return new ResponseEntity<>(token, OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
+		}
+	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}")
 	@Override
