@@ -2,7 +2,7 @@ package com.newplans.api.service.specification;
 
 import com.newplans.api.database.entity.User;
 import com.newplans.api.exception.NoSuchEntryException;
-import com.newplans.api.response.UserResponse;
+import com.newplans.api.response.user.UserResponse;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.newplans.api.response;
+package com.newplans.api.response.user;
 
 import com.newplans.api.database.entity.User;
 import lombok.Getter;

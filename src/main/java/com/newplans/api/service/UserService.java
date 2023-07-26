@@ -4,7 +4,7 @@ import com.newplans.api.database.entity.User;
 import com.newplans.api.exception.IncorrectCredentialsException;
 import com.newplans.api.exception.NoSuchEntryException;
 import com.newplans.api.repository.UserRepository;
-import com.newplans.api.response.UserResponse;
+import com.newplans.api.response.user.UserResponse;
 import com.newplans.api.security.HashedPassword;
 import com.newplans.api.security.Token;
 import com.newplans.api.service.specification.UserServiceInterface;
