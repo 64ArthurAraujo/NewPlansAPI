@@ -7,6 +7,8 @@ import static java.util.Objects.isNull;
 
 public class ProductCreateRequest {
     public String name;
+
+    public String category;
     public Long price;
     public Long stock;
 
@@ -16,6 +18,7 @@ public class ProductCreateRequest {
         Product newProduct = new Product();
 
         newProduct.setName(name);
+        newProduct.setCategory(category.toLowerCase());
         newProduct.setPrice(price);
         newProduct.setStock(stock);
 
@@ -25,6 +28,10 @@ public class ProductCreateRequest {
     private void validate() throws RequestValidationException {
         if (isNull(name) || name.isEmpty()) {
             throw new RequestValidationException("Name cannot be empty or null");
+        }
+
+        if (isNull(category) || category.isEmpty()) {
+            throw new RequestValidationException("Category cannot be empty or null");
         }
 
         if (isNull(price)) {

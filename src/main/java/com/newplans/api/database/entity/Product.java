@@ -19,6 +19,9 @@ public class Product implements Serializable {
     @Column(name = "nome")
     private String name;
 
+    @Column(name = "categoria")
+    private String category;
+
     @Column(name = "preco")
     private Long price;
 

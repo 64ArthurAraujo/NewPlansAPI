@@ -57,7 +57,7 @@ public class ProductControllerTest {
         request.perform(
                 post(REQUEST_PATH + "/products/")
                         .contentType("application/json")
-                        .content("{ \"name\": \"Camizeta Confortável\", \"price\": 500, \"stock\": 1 }")
+                        .content("{ \"name\": \"Camizeta Confortável\", \"category\": \"camiseta\", \"price\": 500, \"stock\": 1 }")
         ).andExpect(status().isCreated());
     }
 
@@ -76,6 +76,24 @@ public class ProductControllerTest {
                 post(REQUEST_PATH + "/products/")
                         .contentType("application/json")
                         .content("{ \"price\": 500, \"stock\": 1 }")
+        ).andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void insertCategoryEmpty() throws Exception {
+        request.perform(
+                post(REQUEST_PATH + "/products/")
+                        .contentType("application/json")
+                        .content("{ \"name\": \"Camizeta Confortável\", \"category\"; \"\",  \"price\": 500, \"stock\": 1 }")
+        ).andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void insertCategoryNull() throws Exception {
+        request.perform(
+                post(REQUEST_PATH + "/products/")
+                        .contentType("application/json")
+                        .content("{ \"name\": \"Camizeta Confortável\", \"price\": 500, \"stock\": 1 }")
         ).andExpect(status().isBadRequest());
     }
 

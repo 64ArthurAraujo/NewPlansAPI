@@ -26,6 +26,17 @@ public class ProductService implements ProductServiceInterface {
     }
 
     @Override
+    public List<Product> getProductsByCategory(String category) throws NoSuchEntryException {
+        List<Product> productsFound = new ArrayList<>(repository.findByCategory(category.toLowerCase()));
+
+        if (productsFound.isEmpty()) {
+            throw new NoSuchEntryException("No entries found in category: '" + category + "'");
+        }
+
+        return productsFound;
+    }
+
+    @Override
     public Product getById(Long id) throws NoSuchEntryException {
         Optional<Product> product = repository.findById(id);
 
@@ -37,7 +48,7 @@ public class ProductService implements ProductServiceInterface {
     }
 
     @Override
-    public List<Product> getProductByName(String name) throws NoSuchEntryException {
+    public List<Product> getProductsByName(String name) throws NoSuchEntryException {
         List<Product> productsFound = new ArrayList<>();
 
         for (Product entry : repository.findAll()) {

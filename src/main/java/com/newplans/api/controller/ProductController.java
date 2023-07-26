@@ -39,9 +39,9 @@ public class ProductController implements CrudController<ProductCreateRequest, P
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/products/search")
-    public ResponseEntity searchByName(@RequestParam("name") String name) {
+    public ResponseEntity searchByName(@RequestParam String name) {
         try {
-            return new ResponseEntity<>(service.getProductByName(name), OK);
+            return new ResponseEntity<>(service.getProductsByName(name), OK);
         } catch (NoSuchEntryException e) {
             return new ResponseEntity<>(e.getMessage(), NOT_FOUND);
         }

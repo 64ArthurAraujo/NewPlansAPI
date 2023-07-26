@@ -16,6 +16,7 @@ CREATE TABLE usuario (
 CREATE TABLE produto (
     id bigint GENERATED ALWAYS AS IDENTITY,
     nome varchar(255),
+    categoria varchar(122),
     preco bigint,
     estoque bigint,
     PRIMARY KEY (id)

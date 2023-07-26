@@ -8,5 +8,7 @@ import java.util.List;
 public interface ProductServiceInterface extends ServiceInterface<Product, Product> {
     List<Product> getAllProducts();
 
-    List<Product> getProductByName(String name) throws NoSuchEntryException;
+    List<Product> getProductsByCategory(String category) throws NoSuchEntryException;
+
+    List<Product> getProductsByName(String name) throws NoSuchEntryException;
 }
