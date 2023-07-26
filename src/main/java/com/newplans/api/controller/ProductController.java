@@ -27,10 +27,11 @@ public class ProductController {
     public ResponseEntity insert(@RequestBody CreateRequest request) {
         try {
             service.insert(request.toEntity());
-            return new ResponseEntity<>(CREATED);
         } catch (RequestValidationException e) {
             return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
         }
+
+        return new ResponseEntity<>(CREATED);
     }
 
     // READ

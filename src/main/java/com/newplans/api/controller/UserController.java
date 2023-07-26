@@ -24,24 +24,24 @@ public class UserController {
 	private UserServiceInterface service;
 
 	// CREATE
-	
 	@RequestMapping(method = RequestMethod.POST, path = "/users", consumes = "application/json")
 	public ResponseEntity insert(@RequestBody CreateRequest request) {
-		try {
-			User newCreatedUser = service.insert(request.toEntity());
+		User createdUser;
 
-			return new ResponseEntity<>(new CreatedResponse(newCreatedUser), CREATED);
+		try {
+			createdUser = service.insert(request.toEntity());
 		} catch (RequestValidationException e) {
 			return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
 		}
+
+		return new ResponseEntity<>(new CreatedResponse(createdUser), CREATED);
  	}
 
 	 // READ
 	 @RequestMapping(method = RequestMethod.POST, path = "/users/login", consumes = "application/json")
 	 public ResponseEntity login(@RequestBody LoginRequest request) {
 		 try {
-			 String token = service.login(request.toEntity());
-			 return new ResponseEntity<>(token, OK);
+			 return new ResponseEntity<>(service.login(request.toEntity()), OK);
 		 } catch (Exception e) {
 			 return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
 		 }
