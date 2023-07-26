@@ -86,13 +86,13 @@ public class UserService implements UserServiceInterface {
 
 	@Override
 	public List<NoCredentialsResponse> getAllUsers() {
-		List<NoCredentialsResponse> usersNoCredentials = new ArrayList<>();
+		List<NoCredentialsResponse> usersFiltered = new ArrayList<>();
 
 		for (User entry : repository.findAll()) {
-			usersNoCredentials.add(new NoCredentialsResponse(entry));
+			usersFiltered.add(new NoCredentialsResponse(entry));
 		}
 
-		return usersNoCredentials;
+		return usersFiltered;
 	}
 
 }
