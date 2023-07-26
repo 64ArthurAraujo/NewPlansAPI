@@ -10,8 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.newplans.api.configuration.Settings.REQUEST_PATH;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -22,36 +21,7 @@ public class ProductControllerTest {
     @Autowired
     private MockMvc request;
 
-    @Test
-    public void searchByName() throws Exception {
-        request.perform( get(REQUEST_PATH + "/products/search?name=camiseta") )
-                .andExpect(status().isOk())
-                .andExpect(content().json("[{\"id\":1,\"name\":\"Camiseta Confortável\",\"price\":90,\"stock\":10}]"))
-                .andReturn();
-    }
-
-    @Test
-    public void searchNonexistantName() throws Exception {
-        request.perform( get(REQUEST_PATH + "/products/search?name=calça") )
-                .andExpect(status().isNotFound())
-                .andReturn();
-    }
-
-    @Test
-    public void getById() throws Exception {
-        request.perform( get(REQUEST_PATH + "/products/1") )
-                .andExpect(status().isOk())
-                .andExpect(content().json("{\"id\":1,\"name\":\"Camiseta Confortável\",\"price\":90,\"stock\":10}"))
-                .andReturn();
-    }
-
-    @Test
-    public void getByNonexistentId() throws Exception {
-        request.perform( get(REQUEST_PATH + "/products/64") )
-                .andExpect(status().isNotFound())
-                .andReturn();
-    }
-
+    // CREATE
     @Test
     public void insert() throws Exception {
         request.perform(
@@ -123,4 +93,65 @@ public class ProductControllerTest {
                         .content("{ \"name\": \"Camiseta Confortável\", \"price\": 0, \"stock\": 1 }")
         ).andExpect(status().isBadRequest());
     }
+
+    // READ
+    @Test
+    public void searchByName() throws Exception {
+        request.perform( get(REQUEST_PATH + "/products/search?name=camiseta") )
+                .andExpect(status().isOk())
+                .andExpect(content().json("[{\"id\":1,\"name\":\"Camiseta Confortável\",\"price\":90,\"stock\":10}]"))
+                .andReturn();
+    }
+
+    @Test
+    public void searchNonexistantName() throws Exception {
+        request.perform( get(REQUEST_PATH + "/products/search?name=calça") )
+                .andExpect(status().isNotFound())
+                .andReturn();
+    }
+
+    @Test
+    public void getById() throws Exception {
+        request.perform( get(REQUEST_PATH + "/products/1") )
+                .andExpect(status().isOk())
+                .andReturn();
+    }
+
+    @Test
+    public void getByNonexistentId() throws Exception {
+        request.perform( get(REQUEST_PATH + "/products/64") )
+                .andExpect(status().isNotFound())
+                .andReturn();
+    }
+
+    // UPDATE
+    @Test
+    public void updateName() throws Exception {
+        request.perform(
+                put(REQUEST_PATH + "/products/1/name")
+                        .contentType("application/json")
+                        .content("{ \"name\": \"Camiseta Desconfortável\", \"adminToken\": \"4e9394b4d2876b8741b10a\" }")
+        ).andExpect(status().isOk());
+    }
+
+    @Test
+    public void updateNameNonExistentToken() throws Exception {
+        request.perform(
+                put(REQUEST_PATH + "/products/1/name")
+                        .contentType("application/json")
+                        .content("{ \"name\": \"Camiseta Desconfortável\", \"adminToken\": \"saoke021\" }")
+        ).andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void updateNameNonAdminToken() throws Exception {
+        request.perform(
+                put(REQUEST_PATH + "/products/1/name")
+                        .contentType("application/json")
+                        .content("{ \"name\": \"Camiseta Desconfortável\", \"adminToken\": \"4e9394b42d8741b10a\" }")
+        ).andExpect(status().isForbidden());
+    }
+
+    // DELETE
+
 }

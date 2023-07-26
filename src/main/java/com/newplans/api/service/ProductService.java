@@ -1,9 +1,12 @@
 package com.newplans.api.service;
 
 import com.newplans.api.database.entity.Product;
+import com.newplans.api.database.entity.User;
 import com.newplans.api.exception.NoSuchEntryException;
+import com.newplans.api.exception.PermissionDeniedException;
 import com.newplans.api.repository.ProductRepository;
 import com.newplans.api.service.specification.ProductServiceInterface;
+import com.newplans.api.service.specification.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,9 @@ import java.util.Optional;
 public class ProductService implements ProductServiceInterface {
     @Autowired
     private ProductRepository repository;
+
+    @Autowired
+    private UserServiceInterface userService;
 
     public ProductService(ProductRepository repository) {
         this.repository = repository;
@@ -62,6 +68,20 @@ public class ProductService implements ProductServiceInterface {
         }
 
         return productsFound;
+    }
+
+    @Override
+    public Product updateProductName(Long id, String newName, String token) throws NoSuchEntryException, PermissionDeniedException {
+        User userTryingToUpdate = userService.getByToken(token);
+
+        if (!userTryingToUpdate.isAdmin()) {
+            throw new PermissionDeniedException("Insufficient privileges to update product name");
+        }
+
+        Product productToUpdate = this.getById(id);
+        productToUpdate.setName(newName);
+
+        return repository.save(productToUpdate);
     }
 
     @Override

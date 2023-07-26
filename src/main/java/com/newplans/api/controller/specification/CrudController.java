@@ -17,7 +17,6 @@ public interface CrudController<T1, T2> {
     // READ
     ResponseEntity<List<T2>> getAll();
     ResponseEntity getById(@PathVariable Long id);
-
     // UPDATE
 
     // DELETE

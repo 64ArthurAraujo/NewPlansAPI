@@ -26,46 +26,15 @@ public class UserControllerTest {
 	@Autowired
 	private MockMvc request;
 
-	@Test
-	public void getAll() throws Exception {
-		request.perform( get(REQUEST_PATH + "/users/") )
-				.andExpect(status().isOk())
-				.andExpect(content().json("[{\"id\":1,\"name\":\"Arthur\",\"surname\":\"Araujo\",\"email\":\"arthur.araujo@tutanota.com\",\"birthdayDate\":\"20-09-2005\"}]"))
-				.andReturn();
-	}
 
-	@Test
-	public void getById() throws Exception {
-		request.perform( get(REQUEST_PATH + "/users/1") )
-				.andExpect(status().isOk())
-				.andExpect(content().json("{\"id\":1,\"name\":\"Arthur\",\"surname\":\"Araujo\",\"email\":\"arthur.araujo@tutanota.com\",\"birthdayDate\":\"20-09-2005\"}"))
-				.andReturn();
-	}
-
-	@Test
-	public void getByInexistentId() throws Exception {
-		request.perform( get(REQUEST_PATH + "/users/64") )
-				.andExpect(status().isNotFound())
-				.andReturn();
-	}
-	
+	// CREATE
 	@Test
 	public void insert() throws Exception {
-		request.perform( 
-			post(REQUEST_PATH + "/users/")
-				.contentType("application/json") 
-				.content("{ \"name\": \"arthur\", \"surname\": \"araujo\", \"email\": \"arthur.araujo@gmail.com\", \"password\": \"S_enha64\", \"birthdayDate\": \"01-02-2003\" }")
-		).andExpect(status().isCreated());
-	}
-
-	@Test
-	public void login() throws Exception {
 		request.perform(
-						post(REQUEST_PATH + "/users/login")
-								.contentType("application/json")
-								.content("{ \"email\": \"arthur.araujo@gmail.com\", \"password\": \"S_enha64\" }")
-				)
-				.andExpect(status().isOk());
+				post(REQUEST_PATH + "/users/")
+						.contentType("application/json")
+						.content("{ \"name\": \"arthur\", \"surname\": \"araujo\", \"email\": \"arthur.araujo@gmail.com\", \"password\": \"S_enha64\", \"birthdayDate\": \"01-02-2003\" }")
+		).andExpect(status().isCreated());
 	}
 
 	@Test
@@ -184,4 +153,42 @@ public class UserControllerTest {
 						.content("{ \"name\": \"arthur\", \"surname\": \"araujo\", \"email\": \"arthur.araujo@gmail.com\", \"password\": \"S_enha64\" }")
 		).andExpect(status().isBadRequest());
 	}
+
+	// READ
+	@Test
+	public void getAll() throws Exception {
+		request.perform( get(REQUEST_PATH + "/users/") )
+				.andExpect(status().isOk())
+				.andExpect(content().json("[{\"id\":1,\"name\":\"Arthur\",\"surname\":\"Araujo\",\"email\":\"arthur.araujo@tutanota.com\",\"birthdayDate\":\"20-09-2005\"},{\"id\":2,\"name\":\"conta\",\"surname\":\"2\",\"email\":\"conta2@tutanota.com\",\"birthdayDate\":\"20-09-2005\"}]"))
+				.andReturn();
+	}
+
+	@Test
+	public void getById() throws Exception {
+		request.perform( get(REQUEST_PATH + "/users/1") )
+				.andExpect(status().isOk())
+				.andExpect(content().json("{\"id\":1,\"name\":\"Arthur\",\"surname\":\"Araujo\",\"email\":\"arthur.araujo@tutanota.com\",\"birthdayDate\":\"20-09-2005\"}"))
+				.andReturn();
+	}
+
+	@Test
+	public void getByInexistentId() throws Exception {
+		request.perform( get(REQUEST_PATH + "/users/64") )
+				.andExpect(status().isNotFound())
+				.andReturn();
+	}
+
+	@Test
+	public void login() throws Exception {
+		request.perform(
+						post(REQUEST_PATH + "/users/login")
+								.contentType("application/json")
+								.content("{ \"email\": \"arthur.araujo@gmail.com\", \"password\": \"S_enha64\" }")
+				)
+				.andExpect(status().isOk());
+	}
+
+	// UPDATE
+
+	// DELETE
 }

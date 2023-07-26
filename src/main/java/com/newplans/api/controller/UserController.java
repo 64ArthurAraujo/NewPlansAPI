@@ -23,6 +23,8 @@ import static org.springframework.http.HttpStatus.*;
 public class UserController implements CrudController<UserCreateRequest, UserResponse> {
 	@Autowired
 	private UserServiceInterface service;
+
+	// CREATE
 	
 	@RequestMapping(method = RequestMethod.POST, path = "/users", consumes = "application/json")
 	@Override
@@ -36,15 +38,16 @@ public class UserController implements CrudController<UserCreateRequest, UserRes
 		}
  	}
 
-	@RequestMapping(method = RequestMethod.POST, path = "/users/login", consumes = "application/json")
-	public ResponseEntity login(@RequestBody UserLoginRequest request) {
-		try {
-			String token = service.login(request.toEntity());
-			return new ResponseEntity<>(token, OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
-		}
-	}
+	 // READ
+	 @RequestMapping(method = RequestMethod.POST, path = "/users/login", consumes = "application/json")
+	 public ResponseEntity login(@RequestBody UserLoginRequest request) {
+		 try {
+			 String token = service.login(request.toEntity());
+			 return new ResponseEntity<>(token, OK);
+		 } catch (Exception e) {
+			 return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
+		 }
+	 }
 
 	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}")
 	@Override
@@ -60,5 +63,15 @@ public class UserController implements CrudController<UserCreateRequest, UserRes
 	@Override
 	public ResponseEntity<List<UserResponse>> getAll() {
 		return new ResponseEntity<>(service.getAllUsers(), OK);
+	}
+
+	// UPDATE
+	public ResponseEntity updateName(@RequestBody UserLoginRequest request) {
+		return null;
+	}
+
+	// DELETE
+	public ResponseEntity delete(@RequestBody UserLoginRequest request) {
+		return null;
 	}
 }

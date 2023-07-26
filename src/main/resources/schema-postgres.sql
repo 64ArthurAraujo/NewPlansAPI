@@ -10,6 +10,7 @@ CREATE TABLE usuario (
     email varchar(255) UNIQUE,
     senha varchar(255),
     token varchar(255) UNIQUE,
+    admin BOOL DEFAULT false,
     PRIMARY KEY (id)
 );
 

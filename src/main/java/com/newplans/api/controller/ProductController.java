@@ -6,6 +6,8 @@ import com.newplans.api.database.entity.Product;
 import com.newplans.api.exception.NoSuchEntryException;
 import com.newplans.api.exception.RequestValidationException;
 import com.newplans.api.request.ProductCreateRequest;
+import com.newplans.api.request.ProductNameUpdateRequest;
+import com.newplans.api.request.UserLoginRequest;
 import com.newplans.api.service.specification.ProductServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ public class ProductController implements CrudController<ProductCreateRequest, P
     @Autowired
     private ProductServiceInterface service;
 
+    // CREATE
     @RequestMapping(method = RequestMethod.POST, path = "/products", consumes = "application/json")
     @Override
     public ResponseEntity insert(@RequestBody ProductCreateRequest request) {
@@ -32,6 +35,7 @@ public class ProductController implements CrudController<ProductCreateRequest, P
         }
     }
 
+    // READ
     @RequestMapping(method = RequestMethod.GET, path = "/products")
     @Override
     public ResponseEntity<List<Product>> getAll() {
@@ -55,5 +59,36 @@ public class ProductController implements CrudController<ProductCreateRequest, P
         } catch (NoSuchEntryException e) {
             return new ResponseEntity<>(e.getMessage(), NOT_FOUND);
         }
+    }
+
+    // UPDATE
+    @RequestMapping(method = RequestMethod.PUT, path = "/products/{id}/name")
+    public ResponseEntity updateName(
+            @PathVariable Long id,
+            @RequestBody ProductNameUpdateRequest request
+    ) {
+        Product product;
+
+       try {
+           product = service.updateProductName(id, request.getName(), request.getAdminToken());
+       } catch (Exception e) {
+            if (e.getMessage().startsWith("Permission denied")) {
+                return new ResponseEntity<>(e.getMessage(), FORBIDDEN);
+            }
+
+            if (e.getMessage().startsWith("Request validation")) {
+                return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
+            }
+
+            return new ResponseEntity<>(e.getMessage(), NOT_FOUND);
+       }
+
+        return new ResponseEntity<>(product, OK);
+    }
+
+    // DELETE
+    @RequestMapping(method = RequestMethod.DELETE, path = "/products/{id}")
+    public ResponseEntity delete(@RequestBody UserLoginRequest request) {
+        return null;
     }
 }

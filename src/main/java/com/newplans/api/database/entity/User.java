@@ -1,15 +1,11 @@
 package com.newplans.api.database.entity;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 
+import javax.persistence.*;
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
 @Data
@@ -40,4 +36,12 @@ public class User implements Serializable {
 	
 	@Column(name = "token", unique = true)
 	private String token;
+
+	@Column(name = "admin")
+	@Getter(value = AccessLevel.NONE)
+	private boolean admin;
+
+	public boolean isAdmin() {
+		return admin;
+	}
 }
