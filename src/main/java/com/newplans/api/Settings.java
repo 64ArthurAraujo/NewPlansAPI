@@ -1,4 +1,4 @@
-package com.newplans.api.configuration;
+package com.newplans.api;
 
 public class Settings {
 	public static final String API_VERSION = "v1";

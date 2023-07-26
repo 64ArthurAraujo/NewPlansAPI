@@ -1,6 +1,6 @@
 package com.newplans.api.controller;
 
-import com.newplans.api.configuration.Settings;
+import com.newplans.api.Settings;
 import com.newplans.api.database.entity.User;
 import com.newplans.api.exception.NoSuchEntryException;
 import com.newplans.api.exception.RequestValidationException;
