@@ -5,11 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class UserCreatedResponse {
+public class CreatedResponse {
 	private Long id;
 	private String token;
 	
-	public UserCreatedResponse(User user) {
+	public CreatedResponse(User user) {
 		this.id = user.getId();
 		this.token = user.getToken();
 	}

@@ -4,7 +4,7 @@ import com.newplans.api.database.entity.User;
 import com.newplans.api.exception.IncorrectCredentialsException;
 import com.newplans.api.exception.NoSuchEntryException;
 import com.newplans.api.repository.UserRepository;
-import com.newplans.api.response.user.UserResponse;
+import com.newplans.api.response.user.NoCredentialsResponse;
 import com.newplans.api.security.HashedPassword;
 import com.newplans.api.security.Token;
 import com.newplans.api.service.specification.UserServiceInterface;
@@ -36,8 +36,8 @@ public class UserService implements UserServiceInterface {
 		return user.get();
 	}
 
-	public UserResponse getByIdWithoutCredentials(Long id) throws NoSuchEntryException {
-		return new UserResponse(this.getById(id));
+	public NoCredentialsResponse getByIdWithoutCredentials(Long id) throws NoSuchEntryException {
+		return new NoCredentialsResponse(this.getById(id));
 	}
 
 	@Override
@@ -85,11 +85,11 @@ public class UserService implements UserServiceInterface {
 
 
 	@Override
-	public List<UserResponse> getAllUsers() {
-		List<UserResponse> usersNoCredentials = new ArrayList<>();
+	public List<NoCredentialsResponse> getAllUsers() {
+		List<NoCredentialsResponse> usersNoCredentials = new ArrayList<>();
 
 		for (User entry : repository.findAll()) {
-			usersNoCredentials.add(new UserResponse(entry));
+			usersNoCredentials.add(new NoCredentialsResponse(entry));
 		}
 
 		return usersNoCredentials;

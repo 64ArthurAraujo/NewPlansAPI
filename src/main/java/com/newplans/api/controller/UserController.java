@@ -6,8 +6,8 @@ import com.newplans.api.exception.NoSuchEntryException;
 import com.newplans.api.exception.RequestValidationException;
 import com.newplans.api.request.user.CreateRequest;
 import com.newplans.api.request.user.LoginRequest;
-import com.newplans.api.response.user.UserCreatedResponse;
-import com.newplans.api.response.user.UserResponse;
+import com.newplans.api.response.user.CreatedResponse;
+import com.newplans.api.response.user.NoCredentialsResponse;
 import com.newplans.api.service.specification.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +30,7 @@ public class UserController {
 		try {
 			User newCreatedUser = service.insert(request.toEntity());
 
-			return new ResponseEntity<>(new UserCreatedResponse(newCreatedUser), CREATED);
+			return new ResponseEntity<>(new CreatedResponse(newCreatedUser), CREATED);
 		} catch (RequestValidationException e) {
 			return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
 		}
@@ -48,7 +48,7 @@ public class UserController {
 	 }
 
 	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}")
-	public ResponseEntity<UserResponse> getById(@PathVariable Long id) {
+	public ResponseEntity<NoCredentialsResponse> getById(@PathVariable Long id) {
 		try {
 			return new ResponseEntity<>(service.getByIdWithoutCredentials(id), OK);
 		} catch (NoSuchEntryException e) {
@@ -57,7 +57,7 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/users")
-	public ResponseEntity<List<UserResponse>> getAll() {
+	public ResponseEntity<List<NoCredentialsResponse>> getAll() {
 		return new ResponseEntity<>(service.getAllUsers(), OK);
 	}
 
