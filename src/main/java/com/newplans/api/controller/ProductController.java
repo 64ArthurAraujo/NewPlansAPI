@@ -17,13 +17,13 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
-@RequestMapping(path = Settings.REQUEST_PATH)
+@RequestMapping(path = Settings.REQUEST_PATH + "/products")
 public class ProductController {
     @Autowired
     private ProductServiceInterface service;
 
     // CREATE
-    @RequestMapping(method = RequestMethod.POST, path = "/products", consumes = "application/json")
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity create(@RequestBody CreateRequest request) {
         try {
             service.insert(request.toEntity());
@@ -35,12 +35,12 @@ public class ProductController {
     }
 
     // READ
-    @RequestMapping(method = RequestMethod.GET, path = "/products")
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Product>> getAll() {
         return new ResponseEntity<>(service.getAllProducts(), OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/products/search")
+    @RequestMapping(method = RequestMethod.GET, path = "/search")
     public ResponseEntity searchByName(@RequestParam String name) {
         try {
             return new ResponseEntity<>(service.getProductsByName(name), OK);
@@ -49,7 +49,7 @@ public class ProductController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/products/{id}")
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
     public ResponseEntity getById(@PathVariable Long id) {
         try {
             return new ResponseEntity<>(service.getById(id), OK);
@@ -59,7 +59,7 @@ public class ProductController {
     }
 
     // UPDATE
-    @RequestMapping(method = RequestMethod.PUT, path = "/products/{id}/name")
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}/name")
     public ResponseEntity updateName(
             @PathVariable Long id,
             @RequestBody NameUpdateRequest request
@@ -84,7 +84,7 @@ public class ProductController {
     }
 
     // DELETE
-    @RequestMapping(method = RequestMethod.DELETE, path = "/products/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
     public ResponseEntity delete(@RequestBody LoginRequest request) {
         return null;
     }

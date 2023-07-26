@@ -18,13 +18,13 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
-@RequestMapping(path = Settings.REQUEST_PATH)
+@RequestMapping(path = Settings.REQUEST_PATH + "/users")
 public class UserController {
 	@Autowired
 	private UserServiceInterface service;
 
 	// CREATE
-	@RequestMapping(method = RequestMethod.POST, path = "/users", consumes = "application/json")
+	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity create(@RequestBody CreateRequest request) {
 		User createdUser;
 
@@ -38,7 +38,7 @@ public class UserController {
  	}
 
 	 // READ
-	 @RequestMapping(method = RequestMethod.POST, path = "/users/login", consumes = "application/json")
+	 @RequestMapping(method = RequestMethod.POST, path = "/login", consumes = "application/json")
 	 public ResponseEntity login(@RequestBody LoginRequest request) {
 		 try {
 			 return new ResponseEntity<>(service.login(request.toEntity()), OK);
@@ -47,7 +47,7 @@ public class UserController {
 		 }
 	 }
 
-	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}")
+	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	public ResponseEntity<NoCredentialsResponse> getById(@PathVariable Long id) {
 		try {
 			return new ResponseEntity<>(service.getByIdWithoutCredentials(id), OK);
@@ -56,7 +56,7 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping(method = RequestMethod.GET, path = "/users")
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<NoCredentialsResponse>> getAll() {
 		return new ResponseEntity<>(service.getAllUsers(), OK);
 	}
