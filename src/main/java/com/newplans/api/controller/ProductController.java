@@ -66,6 +66,7 @@ public class ProductController {
         Product product;
 
        try {
+           request.validate();
            product = service.updateProductName(id, request.getName(), request.getAdminToken());
        } catch (Exception e) {
             if (e.getMessage().startsWith("Permission denied")) {

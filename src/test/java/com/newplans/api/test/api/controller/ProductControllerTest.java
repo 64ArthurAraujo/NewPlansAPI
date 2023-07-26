@@ -152,6 +152,51 @@ public class ProductControllerTest {
         ).andExpect(status().isForbidden());
     }
 
+    @Test
+    public void updateNameNonExistentId() throws Exception {
+        request.perform(
+                put(REQUEST_PATH + "/products/64/name")
+                        .contentType("application/json")
+                        .content("{ \"name\": \"Camiseta Desconfortável\", \"adminToken\": \"4e9394b4d2876b8741b10a\" }")
+        ).andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void updateNameNameEmpty() throws Exception {
+        request.perform(
+                put(REQUEST_PATH + "/products/64/name")
+                        .contentType("application/json")
+                        .content("{ \"name\": \"\", \"adminToken\": \"4e9394b4d2876b8741b10a\" }")
+        ).andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void updateNameNameNull() throws Exception {
+        request.perform(
+                put(REQUEST_PATH + "/products/64/name")
+                        .contentType("application/json")
+                        .content("{ \"adminToken\": \"4e9394b4d2876b8741b10a\" }")
+        ).andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void updateNameTokenEmpty() throws Exception {
+        request.perform(
+                put(REQUEST_PATH + "/products/64/name")
+                        .contentType("application/json")
+                        .content("{ \"name\": \"Camiseta Desconfortável\", \"adminToken\": \"\" }")
+        ).andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void updateNameTokenNull() throws Exception {
+        request.perform(
+                put(REQUEST_PATH + "/products/64/name")
+                        .contentType("application/json")
+                        .content("{ \"name\": \"Camiseta Desconfortável\" }")
+        ).andExpect(status().isBadRequest());
+    }
+
     // DELETE
 
 }
